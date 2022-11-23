@@ -25,7 +25,7 @@ jobs:
       - name: Push Image
         run: |
           docker buildx build \
-                  --tag  ghcr.io/traewelldroid/auth-service/bot:"$GITHUB_SHA" \
-                  --tag  ghcr.io/traewelldroid/auth-service/bot:latest \
+                  --tag  ghcr.io/traewelldroid/auth-service/service:"$GITHUB_SHA" \
+                  --tag  ghcr.io/traewelldroid/auth-service/service:latest \
                   --file ./Dockerfile \
                   --output type=image,push=true .
