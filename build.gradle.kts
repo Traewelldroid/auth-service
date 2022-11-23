@@ -22,6 +22,7 @@ dependencies {
     implementation("io.ktor", "ktor-server-netty")
     implementation("io.ktor", "ktor-server-auth")
     implementation("io.ktor", "ktor-server-resources")
+    implementation("io.ktor", "ktor-server-html-builder")
 
     implementation("io.ktor", "ktor-client-okhttp")
     implementation("io.ktor", "ktor-client-content-negotiation")

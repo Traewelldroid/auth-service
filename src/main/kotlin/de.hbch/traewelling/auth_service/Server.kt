@@ -8,12 +8,14 @@ import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.engine.*
+import io.ktor.server.html.*
 import io.ktor.server.netty.*
 import io.ktor.server.plugins.*
 import io.ktor.server.resources.*
 import io.ktor.server.resources.Resources
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import kotlinx.html.*
 import kotlinx.serialization.Serializable
 
 private const val AUTH_NAME = "TRWL"
@@ -68,12 +70,40 @@ fun main() {
                     val principal = call.principal<OAuthAccessTokenResponse.OAuth2>()
                         ?: throw BadRequestException("Missing OAuth data")
 
-                    call.respond(call.respondRedirect(Config.DEEPLINK.modify {
+                    val url = Config.DEEPLINK.modify {
                         path("auth", "login")
                         parameters["access_token"] = principal.accessToken
                         parameters["refresh_token"] = principal.refreshToken.toString()
                         parameters["expires_in"] = principal.expiresIn.toString()
-                    }))
+                    }
+
+                    call.respondHtml {
+                        head {
+                            title { +"Traewelling - Login" }
+                        }
+
+                        body {
+                            script {
+                                unsafe {
+                                    val intent =
+                                        URLBuilder(url).apply {
+                                            protocol = URLProtocol("traewelldroid", 80)
+                                        }.buildString()
+
+                                    //language=JavaScript
+                                    raw("""setTimeout(() => {window.location.href = "$intent"}, 250)""".trimIndent())
+                                }
+                            }
+
+                            p {
+                                +"If you are not getting redirected please click "
+                                a {
+                                    href = url
+                                    +"here"
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
