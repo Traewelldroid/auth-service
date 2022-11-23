@@ -21,4 +21,4 @@ Ktor service for OAuth flow
 
 # Docker
 
-Pre-built Docker images can be found [here]() and a [docker-compose file here](docker-compose.yaml)
+Pre-built Docker images can be found [here](https://github.com/Traewelldroid/auth-service/pkgs/container/auth-service%2Fservice) and a [docker-compose file here](docker-compose.yaml)
