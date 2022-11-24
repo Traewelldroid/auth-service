@@ -34,5 +34,5 @@ dependencies {
 }
 
 application {
-    mainClass.set("de.hbch.traewelling.auth_service")
+    mainClass.set("de.hbch.traewelling.auth_service.ServerKt")
 }
