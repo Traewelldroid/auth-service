@@ -1,5 +1,5 @@
 # auth-service
-
+**Important:** This service is obsolete since [#115](https://github.com/Traewelldroid/traewelldroid/pull/115)
 Ktor service for OAuth flow
 
 # Endpoints
